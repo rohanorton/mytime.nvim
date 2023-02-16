@@ -76,7 +76,7 @@ local function Ui(opts)
     vim.api.nvim_input("i")
 
     -- Submit on enter (in insert mode)
-    vim.keymap.set("i", "<CR>", self.write_entry_to_file, { silent = true, buffer = bufh })
+    vim.keymap.set("i", "<CR>", self.add_log, { silent = true, buffer = bufh })
 
     -- Quit / Abort on q (in normal mode)
     vim.keymap.set("n", "q", self.close_input, { silent = true, buffer = bufh })
@@ -89,11 +89,11 @@ local function Ui(opts)
     return is_input_open() and self.close_input() or self.open_input()
   end
 
-  function self.write_entry_to_file()
+  function self.add_log()
     local lines = vim.fn.getline(1, 1)
     local line = normalise(lines[1])
     if line ~= "" then
-      opts.write_entry_to_file(line)
+      opts.add_log(line)
     end
     self.close_input()
   end

@@ -15,7 +15,7 @@ local function mktemp(suffix)
 end
 
 describe("MyTime", function()
-  describe(".create_log()", function()
+  describe(".add_log()", function()
     -- SETUP --
     local tmp_test_dir = mktemp("mytime.nvim")
     -- END SETUP --
@@ -51,14 +51,14 @@ describe("MyTime", function()
     it("creates file when first called", function()
       assert(not path_exists(tmp_test_dir .. "/" .. expected_filename), "File should not exist before function run")
 
-      mytime.create_log("initial note")
+      mytime.add_log("initial note")
 
       assert(path_exists(tmp_test_dir .. "/" .. expected_filename), "File should exist after function run")
     end)
 
     it("appends note to file, with timestamp", function()
       local msg = "initial note"
-      mytime.create_log(msg)
+      mytime.add_log(msg)
 
       local actual = vim.fn.readfile(tmp_test_dir .. "/" .. expected_filename)
       local expected = { "10:03 - initial note" }
@@ -66,9 +66,9 @@ describe("MyTime", function()
     end)
 
     it("adds multiple notes", function()
-      mytime.create_log("1")
-      mytime.create_log("2")
-      mytime.create_log("3")
+      mytime.add_log("1")
+      mytime.add_log("2")
+      mytime.add_log("3")
 
       local actual = vim.fn.readfile(tmp_test_dir .. "/" .. expected_filename)
       local expected = {
@@ -82,7 +82,7 @@ describe("MyTime", function()
 
     it("has protection against simple shell injection attack", function()
       -- Initial naive implementation used shell commands that made this possible
-      mytime.create_log("boring'; echo 'evil")
+      mytime.add_log("boring'; echo 'evil")
 
       local actual = vim.fn.readfile(tmp_test_dir .. "/" .. expected_filename)
       local not_expected = { "evil" }

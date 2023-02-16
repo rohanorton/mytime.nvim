@@ -38,7 +38,7 @@ M.setup = function(opts)
   ui = Ui({
     height = opts.ui_height,
     width = opts.ui_width,
-    write_entry_to_file = mytime.create_log,
+    add_log = mytime.add_log,
   })
 end
 
@@ -47,9 +47,15 @@ M.cleanup = function()
   ui = nil
 end
 
-M.toggle_input = function()
+M.add_log = function()
   if ui then
     ui.toggle_input()
+  end
+end
+
+M.read_log = function()
+  if mytime then
+    mytime.read_log()
   end
 end
 

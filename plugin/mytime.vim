@@ -1,1 +1,2 @@
-noremap <silent> <Plug>mytime-toggle-input <Cmd>lua require'mytime'.toggle_input()<CR>
+noremap <silent> <Plug>mytime-add-log <Cmd>lua require'mytime'.add_log()<CR>
+noremap <silent> <Plug>mytime-read-log <Cmd>lua require'mytime'.read_log()<CR>
