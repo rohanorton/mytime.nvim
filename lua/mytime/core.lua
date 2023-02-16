@@ -18,6 +18,9 @@ local MyTime = function(opts)
 
     -- Append the text to file
     vim.fn.writefile({ text }, filepath(), "a")
+
+    -- TODO: if file is open in buffer, we should ensure that it is
+    --       updated to show the new entry.
   end
 
   self.read_log = function()
@@ -25,6 +28,12 @@ local MyTime = function(opts)
 
     -- TODO: Not the nicest ux, is it enough?
     vim.cmd("! cat " .. filepath())
+  end
+
+  self.edit_log = function()
+    log.trace("edit_log()")
+
+    vim.cmd("e " .. filepath())
   end
 
   return self

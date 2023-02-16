@@ -83,3 +83,17 @@ Or it can be assigned a keybinding:
 ```vim
 noremap <silent> <leader>lr <Plug>mytime-read-log
 ```
+
+### Edit Log
+
+Open the log file for manual editing
+
+```lua
+require('mytime').edit_log()
+```
+
+Or it can be assigned a keybinding:
+
+```vim
+noremap <silent> <leader>le <Plug>mytime-edit-log
+```

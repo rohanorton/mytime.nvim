@@ -59,4 +59,10 @@ M.read_log = function()
   end
 end
 
+M.edit_log = function()
+  if mytime then
+    mytime.edit_log()
+  end
+end
+
 return M
